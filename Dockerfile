@@ -1,18 +1,18 @@
 # Dockerfile
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 
 ENV LANG=C.UTF-8 \
-    SERVER_DIR=/data \
+    SERVER_DIR=/opt/minecraft \
     SERVER_JAR=${SERVER_JAR_NAME:-server.jar}
 
 WORKDIR ${SERVER_DIR}
 
-# Install basic tools for downloading (if needed)
+# Tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
-# copy local server jar if present (preferred: put server.jar into /server)
+# copy server jar
 COPY server/${SERVER_JAR_NAME:-server.jar} ${SERVER_JAR}
 
 # copy entrypoint
@@ -21,7 +21,7 @@ RUN chmod +x /entrypoint.sh
 
 EXPOSE 25565/tcp
 
-VOLUME ["/data"]
+VOLUME ["/data"]  # nur für Spielstände
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["run"]
