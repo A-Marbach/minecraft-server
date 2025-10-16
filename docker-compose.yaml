@@ -1,0 +1,18 @@
+services:
+  mc-server:
+    build: .
+    image: mc-server:latest
+    container_name: mc-server
+    env_file:
+      - .env
+    environment:
+      - EULA=${EULA}
+      - SERVER_JAR=/opt/minecraft/${SERVER_JAR_NAME}
+      - MAX_RAM=${MAX_RAM}
+      - MIN_RAM=${MIN_RAM}
+    ports:
+      - "${HOST_PORT:-8888}:25565/tcp"
+      - "${HOST_PORT:-8888}:25565/udp"
+    volumes:
+      - ./data:/data   # nur Spielstände
+    restart: unless-stopped
