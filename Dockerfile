@@ -2,9 +2,8 @@
 FROM openjdk:21-jdk-slim
 
 ARG MINECRAFT_VERSION=1.21
-ENV SERVER_DIR=/opt/minecraft
-ENV SERVER_JAR=$SERVER_DIR/server.jar
-WORKDIR $SERVER_DIR
+ENV SERVER_JAR=/opt/minecraft/server.jar
+WORKDIR /opt/minecraft
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl ca-certificates \
