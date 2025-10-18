@@ -2,6 +2,7 @@ services:
   mc-server:
     build: .
     image: mc-server:latest
+    container_name: mc-server
     env_file:
       - .env
     environment:
