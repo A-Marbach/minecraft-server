@@ -18,7 +18,7 @@ A lightweight, containerized setup for running a **Minecraft Java Edition Server
 
 ---
 
-## 🧩 About
+##  About
 
 This repository contains a simple setup for running a **Minecraft Java Edition Server** inside a Docker container.  
 It aims to provide a **reproducible**, **portable**, and **easy-to-deploy** environment for hosting your own Minecraft world.
@@ -32,7 +32,7 @@ It aims to provide a **reproducible**, **portable**, and **easy-to-deploy** envi
 
 ---
 
-## ⚡ Quickstart
+##  Quickstart
 
 ### Prerequisites
 - [Docker](https://docs.docker.com/get-docker/) installed  
@@ -117,33 +117,33 @@ You can connect via Minecraft client using:
 `<your-server-ip>:8888`
 
 ### Project Structure
+```
 .
 ├── .gitignore
 ├── docker-compose.yaml
 ├── Dockerfile
 ├── entrypoint.sh
-├── server/
-│   └── server.jar
 └── README.md
+```
 
 ### Testing
 
 1. Verify Server Port
 
+You can use `nc` (netcat) if installed on your system:
 
 ```bash
 nc -zv <your-server-ip> 8888
 ```
 
-2. Optional: Use Python mcstatus
-
+⚠️ If nc is not available (e.g., on Windows), you can use Python mcstatus instead:
 
 ```bash
 pip install mcstatus
 mcstatus <your-server-ip>:8888 status
 ```
 
-3. Confirm Persistence
+2. Confirm Persistence
 
 Restart the container to ensure that world data and configuration persist:
 
