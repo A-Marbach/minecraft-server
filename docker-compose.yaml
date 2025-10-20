@@ -1,6 +1,9 @@
 services:
   mc-server:
-    build: .
+    build:
+      context: .
+      args:
+        SERVER_JAR_URL: ${SERVER_JAR_URL}
     image: mc-server:latest
     container_name: mc-server
     env_file:
@@ -11,7 +14,6 @@ services:
       - MIN_RAM=${MIN_RAM}
     ports:
       - "${HOST_PORT:-25565}:25565"
-
     volumes:
       - ./data:/data   # nur Spielstände
     restart: unless-stopped
