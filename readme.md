@@ -48,8 +48,8 @@ It aims to provide a **reproducible**, **portable**, and **easy-to-deploy** envi
 Clone this repository and start the Minecraft server using Docker Compose:
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-name>
+git clone <https://github.com/A-Marbach/minecraft-server>
+cd <minecraft-server>
 docker-compose up -d --build
 ```
 
