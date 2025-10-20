@@ -20,7 +20,7 @@ EXPOSE 25565/tcp
 VOLUME ["/data"]
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["run"]
+
 
 
 
