@@ -26,7 +26,7 @@ It aims to provide a **reproducible**, **portable**, and **easy-to-deploy** envi
 ### Contents
 - **Dockerfile** – builds a custom image based on openjdk:21-jdk-slim  
 - **docker-compose.yaml** – defines the mc-server service (ports, environment, volumes)  
-- **entrypoint.sh** – startup script for launching the server  
+- **entrypoint.sh** – startup script that checks the server JAR exists, applies EULA and RAM settings, and starts the server.
 - **.gitignore** – excludes irrelevant files from version control  
 - **.env.example** – sample environment configuration  
 
@@ -37,7 +37,8 @@ It aims to provide a **reproducible**, **portable**, and **easy-to-deploy** envi
 ### Prerequisites
 - [Docker](https://docs.docker.com/get-docker/) installed  
 - [Docker Compose](https://docs.docker.com/compose/install/) installed  
-- Minecraft server .jar downloaded from [minecraft.net](https://www.minecraft.net/en-us/download/server)
+- Server JAR is automatically downloaded during the **Docker image build** using the `SERVER_JAR_URL` build argument. 
+  The entrypoint script only checks if the file exists.
 
 ### Start the Server
 
@@ -78,9 +79,11 @@ You can change them as needed:
 
 ```yaml
 environment:
-  EULA: "TRUE"       # You must accept the Minecraft EULA
-  MEMORY: "2G"       # JVM memory allocation
-  SERVER_JAR_NAME: "server.jar"
+  EULA: "true"           # You must accept the Minecraft EULA
+  MAX_RAM: "2G"          # JVM maximum memory allocation
+  MIN_RAM: "1G"          # JVM minimum memory allocation
+  SERVER_JAR_URL: "https://piston-data.mojang.com/v1/objects/95495a7f485eedd84ce928cef5e223b757d2f764/server.jar" # optional: specific version
+# Used as a build argument in Dockerfile. The JAR is downloaded during image build, not by the container.
 ```
 
 ⚠️ Do not store credentials, tokens, or sensitive data inside the repository. Use a .env file if needed.
@@ -160,4 +163,3 @@ No sensitive information (SSH keys, tokens, IP addresses, etc.) should be commit
 
 All configuration is done via environment variables in accordance with best practices.
 
- was sagst du dazu?
